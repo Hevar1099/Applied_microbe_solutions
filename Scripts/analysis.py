@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy.stats as sp
 
 df = pd.read_csv("Data/bacterial_growth_data.csv")
 df.head(10)
@@ -89,6 +90,33 @@ sns.barplot(
     y="Optical_Density_600nm",
     hue="Strain",
     data=mean_values,
-    palette="Set2"
+    palette="Set2",
 )
 plt.savefig("Output/barplot_growth_rate.png", dpi=300)
+df_cleaned_E
+
+# ------------ #
+# statistical analysis
+
+df_cleaned_E = final_time[df_cleaned["Strain"] == "E. coli"]
+df_cleaned_S = final_time[df_cleaned["Strain"] == "S. aureus"]
+
+# Null hypothesis: There is no significant difference on the growth rates of E. coli and when compound X is used.
+# Alternative hypothesis: There is a significant difference on the growth rates of E. coli and when compound X is used.
+t_stat, p_value = sp.ttest_ind(
+    df_cleaned_E[df_cleaned_E["Treatment"] == "Control"]["Optical_Density_600nm"],
+    df_cleaned_E[df_cleaned_E["Treatment"] == "Compound-X"]["Optical_Density_600nm"],
+)
+print(f"E. coli t-statistic: {round(t_stat, 5)}, p-value: {round(p_value, 5)}")
+
+# Null hypothesis: There is no significant difference in the growth rates of S. aureus when compound X is applied.
+# Alternative hypothesis: There is a significant difference in the growth rates of S. aureus when compound X is applied.
+t_stat, p_value = sp.ttest_ind(
+    df_cleaned_S[df_cleaned_S["Treatment"] == "Control"]["Optical_Density_600nm"],
+    df_cleaned_S[df_cleaned_S["Treatment"] == "Compound-X"]["Optical_Density_600nm"],
+)
+print(f"S. aureus t-statistic: {round(t_stat, 5)}, p-value: {round(p_value, 5)}")
+
+# Alternative hypothesis: There is a significant difference in the growth rates of E. coli and S. aureus when compound X is applied.
+# NOTE: Based on the p-values, we can conclude that compound X has a significant inhibitory effect on the growth of both E. coli and S. aureus.
+# there fore we reject the null hypothesis in both cases.
