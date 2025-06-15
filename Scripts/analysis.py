@@ -23,3 +23,5 @@ df_cleaned["Strain"] = df_cleaned["Strain"].astype("category")
 df_cleaned["Treatment"] = df_cleaned["Treatment"].astype("category")
 df_cleaned.info()
 
+df_cleaned.to_csv("Data/clean_dataframe.csv", index = False)
+
