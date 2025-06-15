@@ -98,8 +98,8 @@ df_cleaned_E
 # ------------ #
 # statistical analysis
 
-df_cleaned_E = final_time[df_cleaned["Strain"] == "E. coli"]
-df_cleaned_S = final_time[df_cleaned["Strain"] == "S. aureus"]
+df_cleaned_E = final_time[final_time["Strain"] == "E. coli"]
+df_cleaned_S = final_time[final_time["Strain"] == "S. aureus"]
 
 # Null hypothesis: There is no significant difference on the growth rates of E. coli and when compound X is used.
 # Alternative hypothesis: There is a significant difference on the growth rates of E. coli and when compound X is used.
@@ -111,6 +111,7 @@ print(f"E. coli t-statistic: {round(t_stat, 5)}, p-value: {round(p_value, 5)}")
 
 # Null hypothesis: There is no significant difference in the growth rates of S. aureus when compound X is applied.
 # Alternative hypothesis: There is a significant difference in the growth rates of S. aureus when compound X is applied.
+
 t_stat, p_value = sp.ttest_ind(
     df_cleaned_S[df_cleaned_S["Treatment"] == "Control"]["Optical_Density_600nm"],
     df_cleaned_S[df_cleaned_S["Treatment"] == "Compound-X"]["Optical_Density_600nm"],
