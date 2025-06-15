@@ -88,7 +88,7 @@ sns.barplot(
     x="Treatment",
     y="Optical_Density_600nm",
     hue="Strain",
-    data=mean_values, 
-    palette = "Set2"
+    data=mean_values,
+    palette="Set2"
 )
-plt.savefig("Output/barplot_growth_rate.png", dpi = 300)
+plt.savefig("Output/barplot_growth_rate.png", dpi=300)
