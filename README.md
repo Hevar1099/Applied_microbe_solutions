@@ -60,7 +60,7 @@ pip install pandas numpy matplotlib seaborn scipy
 1. **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
+    git clone <https://github.com/Hevar1099/Applied_microbe_solutions>
     cd Applied_microbe_solutions
     ```
 
